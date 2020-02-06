@@ -10,16 +10,33 @@
 	<packaging>jar</packaging>
 
 	<properties>
+
+		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<serenity.version>1.0.47</serenity.version>
-		<serenity.maven.version>1.0.47</serenity.maven.version>
-		<webdriver.driver>firefox</webdriver.driver>
+		<serenity.version>2.0.9</serenity.version>
+		<serenity.maven.version>2.0.9</serenity.maven.version>
+		<serenity.cucumber.version>1.9.19</serenity.cucumber.version>
+		<encoding>UTF-8</encoding>
+		<tags></tags>
+		<parallel.tests>4</parallel.tests>
+
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>23.6-jre</version>
+		</dependency>
 		<dependency>
 			<groupId>net.serenity-bdd</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>serenity-core</artifactId>
 			<version>${serenity.version}</version>
 		</dependency>
 		<dependency>
@@ -28,38 +45,75 @@
 			<version>${serenity.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.6.1</version>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-screenplay</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-screenplay-webdriver</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-screenplay-rest</artifactId>
+			<version>${serenity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.serenity-bdd</groupId>
+			<artifactId>serenity-cucumber</artifactId>
+			<version>${serenity.cucumber.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
+			<version>4.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<version>1.7.0</version>
-			<scope>test</scope>
+			<version>3.6.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+
 	</dependencies>
+
 	<build>
+
 		<plugins>
+
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
+				<configuration>
+					<argLine>-Xmx1024m -XX:MaxPermSize=512m</argLine>
+					<skip>true</skip>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.18</version>
+				<version>2.18.1</version>
 				<configuration>
 					<includes>
-						<include>**/features/**/When*.java</include>
+						<include>**/*Test.java</include>
+						<include>**/features/**/*.java</include>
 					</includes>
-					<systemProperties>
-						<webdriver.driver>${webdriver.driver}</webdriver.driver>
-						<surefire.rerunFailingTestsCount>${surefire.rerunFailingTestsCount}</surefire.rerunFailingTestsCount>
-						<surefire.rerunFailingTestsCount>${surefire.rerunFailingTestsCount}</surefire.rerunFailingTestsCount>
-					</systemProperties>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>net.serenity-bdd.maven.plugins</groupId>
@@ -68,7 +122,7 @@
 				<dependencies>
 					<dependency>
 						<groupId>net.serenity-bdd</groupId>
-						<artifactId>core</artifactId>
+						<artifactId>serenity-core</artifactId>
 						<version>${serenity.version}</version>
 					</dependency>
 				</dependencies>
@@ -82,6 +136,17 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
 		</plugins>
+
 	</build>
+
 </project>
