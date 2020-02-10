@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="1" failures="0" name="SerenityInitialTests" skipped="0" tests="1" time="10.0" timestamp="2020-02-06 04:01:59"><testcase classname="SerenityInitialTests" name="Get users"><error type="java.lang.NullPointerException"/><system-err>null&#13;
-SerenityInitialTests.getUsers(SerenityInitialTests.java:35)&#13;
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="1" failures="0" name="SerenityInitialTests" skipped="0" tests="1" time="8.36" timestamp="2020-02-10 03:59:14"><testcase classname="SerenityInitialTests" name="Get users"><error type="java.lang.NullPointerException"/><system-err>null&#13;
+SerenityInitialTests.getUsers(SerenityInitialTests.java:36)&#13;
 org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)&#13;
 org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)&#13;
 org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:542)&#13;

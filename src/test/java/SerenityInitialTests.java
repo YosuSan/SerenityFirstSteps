@@ -32,8 +32,8 @@ public class SerenityInitialTests {
 
 		julian.should(seeThat("el codigo de respuesta", ResponseCode.was(), equalTo(200)));
 
-		Datum user = new GetUsersQuestion().answeredBy(julian).getData().stream().filter(x -> x.getId() == 1)
-				.findFirst().orElse(null);
+		Datum user = new GetUsersQuestion().answeredBy(julian)
+				.getData().stream().filter(x -> x.getId() == 1).findFirst().orElse(null);
 		
 		julian.should(seeThat("Usuario no es nuelo", act -> user, notNullValue()));
 		
